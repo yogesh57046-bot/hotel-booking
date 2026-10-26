@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>My Bookings</h1>
+{% if bookings %}
+<table>
+  <thead>
+    <tr><th>Room</th><th>Guest</th><th>Check-in</th><th>Check-out</th><th>Total</th><th></th></tr>
+  </thead>
+  <tbody>
+    {% for b in bookings %}
+    <tr>
+      <td>{{ b["room_name"] }}</td>
+      <td>{{ b["guest_name"] }}<br><small>{{ b["guest_email"] }}</small></td>
+      <td>{{ b["check_in"] }}</td>
+      <td>{{ b["check_out"] }}</td>
+      <td>₹{{ b["total_price"] }}</td>
+      <td>
+        <form method="post" action="{{ url_for('cancel', booking_id=b['id']) }}"
+              onsubmit="return confirm('Cancel this booking?');">
+          <button type="submit" class="btn danger">Cancel</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>No bookings yet. <a href="{{ url_for('index') }}">Pick a room</a>.</p>
+{% endif %}
+{% endblock %}

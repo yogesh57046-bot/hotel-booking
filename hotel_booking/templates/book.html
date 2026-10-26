@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Book: {{ room["name"] }}</h1>
+<p>{{ room["description"] }} <strong>₹{{ room["price_per_night"] }}</strong> / night.</p>
+
+<form method="post" class="form">
+  <label>Your name
+    <input type="text" name="guest_name" required>
+  </label>
+  <label>Email
+    <input type="email" name="guest_email" required>
+  </label>
+  <label>Check-in
+    <input type="date" name="check_in" min="{{ today }}" required>
+  </label>
+  <label>Check-out
+    <input type="date" name="check_out" min="{{ today }}" required>
+  </label>
+  <button type="submit" class="btn">Confirm booking</button>
+</form>
+{% endblock %}

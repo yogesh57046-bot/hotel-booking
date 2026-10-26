@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Our Rooms</h1>
+<div class="cards">
+  {% for room in rooms %}
+  <div class="card">
+    <h2>{{ room["name"] }}</h2>
+    <p>{{ room["description"] }}</p>
+    <p class="meta">Sleeps {{ room["capacity"] }} · <strong>₹{{ room["price_per_night"] }}</strong> / night</p>
+    <a class="btn" href="{{ url_for('book', room_id=room['id']) }}">Book now</a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
